@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <h2>Welcome, {{ user.name }}!</h2>
+  <p>Account No: {{ user.accNo }} | Balance: ₹{{ "%.2f"|format(user.balance) }}</p>
+
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+  <form method="post">
+    <input type="hidden" name="action" value="deposit">
+    Amount: <input name="amount" type="number" step="0.01" required>
+    <button type="submit">Deposit</button>
+  </form>
+
+  <form method="post">
+    <input type="hidden" name="action" value="withdraw">
+    Amount: <input name="amount" type="number" step="0.01" required>
+    <button type="submit">Withdraw</button>
+  </form>
+
+  <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
